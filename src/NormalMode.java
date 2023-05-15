@@ -21,7 +21,7 @@ public class NormalMode implements MouseListener {
         startMessage.setFont(new Font("Arial", Font.PLAIN, 20));
         frame.add(startMessage, BorderLayout.CENTER);
 
-        frame.setSize(1920, 1080);
+        frame.setSize(1675, 925);
         frame.setVisible(true);
 
         frame.addMouseListener(this);
@@ -36,17 +36,20 @@ public class NormalMode implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         if (!click) {
             frame.remove(startMessage);
-            frame.repaint();
-            System.out.println("hi");
+            System.out.println("hello");
             setClicked();
             Circle c = new Circle();
             frame.add(c);
-            c.draw();
+            frame.validate();
+            frame.repaint();
+//            c.repaint();
+            System.out.println("howdy");
         }
         else {
             Circle c = new Circle();
             frame.add(c);
-            c.draw();
+            frame.validate();
+            frame.repaint();
             System.out.println("hi");
         }
     }

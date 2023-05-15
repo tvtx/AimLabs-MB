@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Random;
+
 public class NormalMode implements MouseListener {
     JFrame frame;
     JLabel startMessage;
@@ -25,15 +27,28 @@ public class NormalMode implements MouseListener {
         frame.addMouseListener(this);
     }
 
+
     public static void setClicked(){
         click = true;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        frame.remove(startMessage);
-        frame.repaint();
-        System.out.println("hi");
+        if (!click) {
+            frame.remove(startMessage);
+            frame.repaint();
+            System.out.println("hi");
+            setClicked();
+            Circle c = new Circle();
+            frame.add(c);
+            c.draw();
+        }
+        else {
+            Circle c = new Circle();
+            frame.add(c);
+            c.draw();
+            System.out.println("hi");
+        }
     }
 
     @Override

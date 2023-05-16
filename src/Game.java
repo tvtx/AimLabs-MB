@@ -1,17 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Random;
 
-public class NormalMode implements MouseListener {
+public class Game implements MouseListener {
     JFrame frame;
     JLabel startMessage;
 
     static boolean click;
-    public NormalMode(){
+    public Game(){
         click = false;
         frame = new JFrame("AIM LABS");
         // frame.setLayout(new BorderLayout());
@@ -38,7 +35,7 @@ public class NormalMode implements MouseListener {
             frame.remove(startMessage);
             System.out.println("hello");
             setClicked();
-            Circle c = new Circle();
+            Board c = new Board();
             frame.add(c);
             frame.validate();
             frame.repaint();
@@ -46,7 +43,7 @@ public class NormalMode implements MouseListener {
             System.out.println("howdy");
         }
         else {
-            Circle c = new Circle();
+            Board c = new Board();
             frame.add(c);
             frame.validate();
             frame.repaint();

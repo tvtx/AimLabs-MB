@@ -21,7 +21,7 @@ public class Main {
         frame.add(buttons);
         normal.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
-                NormalMode game = new NormalMode();
+                Game game = new Game();
             }
         });
         frame.addMouseListener(new MouseListener() {

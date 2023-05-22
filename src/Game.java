@@ -30,7 +30,7 @@ public class Game implements MouseListener {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mousePressed(MouseEvent e) {
         if (!click) {
             frame.remove(startMessage);
             System.out.println("hello");
@@ -43,6 +43,15 @@ public class Game implements MouseListener {
             System.out.println("howdy");
         }
         else {
+            int clickX = e.getX();
+            int clickY = e.getY();
+
+            if (isClickedOnCircle(clickX, clickY)) {
+                System.out.println("yass");
+            }
+            else {
+                System.out.println("naurr");
+            }
             Board c = new Board();
             frame.add(c);
             frame.validate();
@@ -51,9 +60,14 @@ public class Game implements MouseListener {
         }
     }
 
-    @Override
-    public void mousePressed(MouseEvent e) {
+    public boolean isClickedOnCircle(int clickX, int clickY) {
+        int radius = 25; // Assuming a fixed radius of 25 for simplicity
+        int centerX = getxLocation() + radius;
+        int centerY = getyLocation() + radius;
 
+        int distance = (int) Math.sqrt(Math.pow(clickX - centerX, 2) + Math.pow(clickY - centerY, 2));
+
+        return distance <= radius;
     }
 
     @Override

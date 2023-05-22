@@ -7,12 +7,13 @@ public class Board extends JPanel implements MouseListener {
 
     // This is the constructor which sets up the JFrame
     // and all other components and containers
-    int xLocation;
-    int yLocation;
-    public Board() {
+    int xLocation = 0;
+    int yLocation = 0;
+
+    Game game;
+    public Board(Game g) {
         addMouseListener(this);
-        xLocation = (int) (Math.random() * 1550)+50;
-        yLocation = (int) (Math.random() * 825)+50;
+        game = g;
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -30,6 +31,8 @@ public class Board extends JPanel implements MouseListener {
                 else {
                     System.out.println("naurr");
                 }
+                repaint();
+
 
             }
 
@@ -67,6 +70,8 @@ public class Board extends JPanel implements MouseListener {
         // System.out.println("aaaa");
 
         g.setColor(Color.BLACK);
+        xLocation = (int) (Math.random() * 1550)+50;
+        yLocation = (int) (Math.random() * 825)+50;
         g.fillOval(xLocation, yLocation, 50, 50);
         // System.out.println("bb");
     }

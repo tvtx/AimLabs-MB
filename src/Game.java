@@ -30,44 +30,39 @@ public class Game implements MouseListener {
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-        if (!click) {
-            frame.remove(startMessage);
-            System.out.println("hello");
-            setClicked();
-            Board c = new Board();
-            frame.add(c);
-            frame.validate();
-            frame.repaint();
-//            c.repaint();
-            System.out.println("howdy");
-        }
-        else {
-            int clickX = e.getX();
-            int clickY = e.getY();
-
-            if (isClickedOnCircle(clickX, clickY)) {
-                System.out.println("yass");
-            }
-            else {
-                System.out.println("naurr");
-            }
-            Board c = new Board();
-            frame.add(c);
-            frame.validate();
-            frame.repaint();
-            System.out.println("hi");
-        }
+    public void mouseClicked(MouseEvent e) {
+        frame.remove(startMessage);
+        Board c = new Board(this);
+        frame.add(c);
+        frame.validate();
+        frame.repaint();
     }
 
-    public boolean isClickedOnCircle(int clickX, int clickY) {
-        int radius = 25; // Assuming a fixed radius of 25 for simplicity
-        int centerX = getxLocation() + radius;
-        int centerY = getyLocation() + radius;
-
-        int distance = (int) Math.sqrt(Math.pow(clickX - centerX, 2) + Math.pow(clickY - centerY, 2));
-
-        return distance <= radius;
+    @Override
+    public void mousePressed(MouseEvent e) {
+//        if (!click) {
+//            frame.remove(startMessage);
+//            System.out.println("hello");
+//            setClicked();
+////            c.repaint();
+//            System.out.println("howdy");
+//        }
+//        else {
+////            int clickX = e.getX();
+////            int clickY = e.getY();
+////
+////            if (isClickedOnCircle(clickX, clickY)) {
+////                System.out.println("yass");
+////            }
+////            else {
+////                System.out.println("naurr");
+////            }
+//            Board c = new Board(this);
+//            frame.add(c);
+//            frame.validate();
+//            frame.repaint();
+//            System.out.println("hi");
+//        }
     }
 
     @Override

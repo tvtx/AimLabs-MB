@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -11,9 +13,20 @@ public class Board extends JPanel implements MouseListener {
     int yLocation = 0;
 
     Game game;
+    Timer timer;
+    long startTime;
+    long elapsedTime;
+
     public Board(Game g) {
         addMouseListener(this);
         game = g;
+
+        timer = new Timer(100, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                elapsedTime = System.currentTimeMillis() - startTime;
+            }
+        });
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -27,9 +40,14 @@ public class Board extends JPanel implements MouseListener {
 
                 if (isClickedOnCircle(clickX, clickY)) {
                     System.out.println("yass");
+                    System.out.println("Time elapsed: " + elapsedTime + "ms");
+                    timer.stop();
                 }
                 else {
+
                     System.out.println("naurr");
+                    System.out.println("Time elapsed: " + elapsedTime + "ms");
+                    timer.stop();
                 }
                 repaint();
 
@@ -73,6 +91,11 @@ public class Board extends JPanel implements MouseListener {
         xLocation = (int) (Math.random() * 1550)+50;
         yLocation = (int) (Math.random() * 825)+50;
         g.fillOval(xLocation, yLocation, 50, 50);
+
+        if (!timer.isRunning()) {
+            startTime = System.currentTimeMillis();
+            timer.start();
+        }
         // System.out.println("bb");
     }
 

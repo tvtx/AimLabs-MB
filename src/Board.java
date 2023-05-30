@@ -7,8 +7,7 @@ import java.awt.event.MouseListener;
 
 public class Board extends JPanel implements MouseListener {
 
-    // This is the constructor which sets up the JFrame
-    // and all other components and containers
+
     int xLocation = 0;
     int yLocation = 0;
 
@@ -16,12 +15,15 @@ public class Board extends JPanel implements MouseListener {
     Timer timer;
     long startTime;
     long elapsedTime;
+    long averageTime = 0;
+    int count = 0;
+    int clicked = 0;
 
     public Board(Game g) {
         addMouseListener(this);
         game = g;
 
-        timer = new Timer(100, new ActionListener() {
+        timer = new Timer(0, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 elapsedTime = System.currentTimeMillis() - startTime;
@@ -40,13 +42,16 @@ public class Board extends JPanel implements MouseListener {
 
                 if (isClickedOnCircle(clickX, clickY)) {
                     System.out.println("yass");
-                    System.out.println("Time elapsed: " + elapsedTime + "ms");
+                    System.out.println("Time elapsed: " + (elapsedTime) + "ms");
+                    averageTime += (elapsedTime);
+                    clicked++;
                     timer.stop();
                 }
                 else {
 
                     System.out.println("naurr");
-                    System.out.println("Time elapsed: " + elapsedTime + "ms");
+                    System.out.println("Time elapsed: " + (elapsedTime) + "ms");
+                    averageTime += (elapsedTime);
                     timer.stop();
                 }
                 repaint();
@@ -96,7 +101,11 @@ public class Board extends JPanel implements MouseListener {
             startTime = System.currentTimeMillis();
             timer.start();
         }
-        // System.out.println("bb");
+        count++;
+        System.out.println(count);
+        if (count >= 31) {
+            game.endGame(clicked, averageTime/30);
+        }
     }
 
     @Override
@@ -106,7 +115,6 @@ public class Board extends JPanel implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println("bobbb");
     }
 
     @Override
@@ -124,26 +132,5 @@ public class Board extends JPanel implements MouseListener {
 
     }
 
-    // Main method just creates a PaintDemo object
 }
-
-
-
-
-
-//    public Circle(){
-//        setVisible(true);
-//    }
-//    public void draw(){
-//        repaint();
-//    }
-//
-//    public void paint(Graphics g) {
-//        super.paint(g);
-//        Random rand = new Random();
-//        int x = rand.nextInt(getWidth());
-//        int y = rand.nextInt(getHeight());
-//        int diameter = 50;
-//        g.drawOval(x, y, diameter, diameter);
-//    }
 

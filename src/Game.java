@@ -7,8 +7,17 @@ public class Game implements MouseListener {
     JFrame frame;
     JLabel startMessage;
 
+    private Main main;
+
+    public static int amtClicked = 0;
+    public static long reactionTime = 0;
+    String amtclick = "";
+    String accuracy = "";
+
+
     static boolean click;
-    public Game(){
+    public Game(Main main){
+        this.main = main;
         click = false;
         frame = new JFrame("AIM LABS");
         // frame.setLayout(new BorderLayout());
@@ -24,9 +33,24 @@ public class Game implements MouseListener {
         frame.addMouseListener(this);
     }
 
+    public long getReactionTime(){
+        return reactionTime;
+    }
 
-    public static void setClicked(){
-        click = true;
+    public String getAccuracy(){
+        return accuracy;
+    }
+
+
+    public void endGame(int numClicked, long timeReacted){
+        amtClicked = numClicked;
+        reactionTime = timeReacted;
+        amtclick = (((double) (amtClicked)/30) * 100) + "";
+        accuracy = amtclick.substring(0, amtclick.indexOf(".")+2);
+        System.out.println("Accuracy: " + accuracy + "%");
+        System.out.println("Reaction Time: " + reactionTime + "ms");
+        main.updateLabels(reactionTime, accuracy);
+        frame.dispose();
     }
 
     @Override
@@ -40,29 +64,7 @@ public class Game implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-//        if (!click) {
-//            frame.remove(startMessage);
-//            System.out.println("hello");
-//            setClicked();
-////            c.repaint();
-//            System.out.println("howdy");
-//        }
-//        else {
-////            int clickX = e.getX();
-////            int clickY = e.getY();
-////
-////            if (isClickedOnCircle(clickX, clickY)) {
-////                System.out.println("yass");
-////            }
-////            else {
-////                System.out.println("naurr");
-////            }
-//            Board c = new Board(this);
-//            frame.add(c);
-//            frame.validate();
-//            frame.repaint();
-//            System.out.println("hi");
-//        }
+
     }
 
     @Override
